@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NMS2" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ec2-3-110-227-178.ap-south-1.compute.amazonaws.com;Initial Catalog=NMS5;Persist Security Info=True;User ID=sa" SettingsObjectName="NmsService.Properties.Settings" SettingsPropertyName="NMS2ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.NMS_CheckAndCreateDTRID" Method="NMS_CheckAndCreateDTRID">
+    <Parameter Name="DTRCode" Parameter="dTRCode" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="FeederId" Parameter="feederId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckAndCreateFeederID" Method="NMS_CheckAndCreateFeederID">
+    <Parameter Name="FeederCode" Parameter="feederCode" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="SdoId" Parameter="sdoId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckAndCreateMeterID" Method="NMS_CheckAndCreateMeterID">
+    <Parameter Name="MeterNumber" Parameter="meterNumber" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Lat" Parameter="lat" Type="System.Decimal" DbType="Decimal(12,9)" />
+    <Parameter Name="Long" Parameter="long" Type="System.Decimal" DbType="Decimal(12,9)" />
+    <Parameter Name="SDOId" Parameter="sDOId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="FeederId" Parameter="feederId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="DTRId" Parameter="dTRId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="InstallationDate" Parameter="installationDate" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckAndCreateNodeTimeSeriesID" Method="NMS_CheckAndCreateNodeTimeSeriesID">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckAndCreateSDOID" Method="NMS_CheckAndCreateSDOID">
+    <Parameter Name="SubdivisionName" Parameter="subdivisionName" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckNodeDBId" Method="NMS_CheckNodeDBId">
+    <Parameter Name="NodeId" Parameter="nodeId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_GetGatewayDBId" Method="NMS_GetGatewayDBId">
+    <Parameter Name="GatewayId" Parameter="gatewayId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_GetNodeTimeSeriesActiveStatus" Method="NMS_GetNodeTimeSeriesActiveStatus">
+    <ElementType Name="NMS_GetNodeTimeSeriesActiveStatusResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NodeDBId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="TimestampUTC" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LinkQuality" Type="System.Decimal" DbType="Decimal(12,3)" CanBeNull="true" />
+      <Column Name="MaxBufferUsage" Type="System.Decimal" DbType="Decimal(12,3)" CanBeNull="true" />
+      <Column Name="Mode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RSSI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsRouter" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="AutoRole" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MsgDelayLowLatency" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EP251TimeUTC" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EP252TimeUTC" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EP253TimeUTC" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EP254TimeUTC" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateTimeUTC" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateTimeUTC" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FirmwareVersion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ScratchpadSequence" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ParentNodeDBId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="HopCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.NMS_InsertGatewayStatusHistory" Method="NMS_InsertGatewayStatusHistory">
+    <Parameter Name="GatewayId" Parameter="gatewayId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Timestamp" Parameter="timestamp" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_UpdateNodeTimeSeriesParentDBId" Method="NMS_UpdateNodeTimeSeriesParentDBId">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ParentDBId" Parameter="parentDBId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckAndCreateNodeIDWithMeterId" Method="NMS_CheckAndCreateNodeIDWithMeterId">
+    <Parameter Name="MeterId" Parameter="meterId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="NodeId" Parameter="nodeId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_UpdateNodeTimeSeries251" Method="NMS_UpdateNodeTimeSeries251">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="GatewayDBId" Parameter="gatewayDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="TimestampUTC" Parameter="timestampUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UpdateTimeUTC" Parameter="updateTimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EP251TimeUTC" Parameter="eP251TimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="MsgDelayLowLatency" Parameter="msgDelayLowLatency" Type="System.Int32" DbType="Int" />
+    <Parameter Name="HopCount" Parameter="hopCount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ChannelReliability" Parameter="channelReliability" Type="System.Decimal" DbType="Decimal(12,3)" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_UpdateNodeTimeSeries252" Method="NMS_UpdateNodeTimeSeries252">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="GatewayDBId" Parameter="gatewayDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="TimestampUTC" Parameter="timestampUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UpdateTimeUTC" Parameter="updateTimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EP252TimeUTC" Parameter="eP252TimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="MsgDelayLowLatency" Parameter="msgDelayLowLatency" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RSSI" Parameter="rSSI" Type="System.Int32" DbType="Int" />
+    <Parameter Name="HopCount" Parameter="hopCount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_UpdateNodeTimeSeries253" Method="NMS_UpdateNodeTimeSeries253">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="GatewayDBId" Parameter="gatewayDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="TimestampUTC" Parameter="timestampUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UpdateTimeUTC" Parameter="updateTimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EP253TimeUTC" Parameter="eP253TimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Mode" Parameter="mode" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Voltage" Parameter="voltage" Type="System.Decimal" DbType="Decimal(12,3)" />
+    <Parameter Name="MaxBufferUsage" Parameter="maxBufferUsage" Type="System.Decimal" DbType="Decimal(12,3)" />
+    <Parameter Name="LinkQuality" Parameter="linkQuality" Type="System.Decimal" DbType="Decimal(12,3)" />
+    <Parameter Name="HopCount" Parameter="hopCount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MsgDelayLowLatency" Parameter="msgDelayLowLatency" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsRouter" Parameter="isRouter" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="AutoRole" Parameter="autoRole" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="BlackListedRadioChannelsCount" Parameter="blackListedRadioChannelsCount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MemAllocFails" Parameter="memAllocFails" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_UpdateNodeTimeSeries254" Method="NMS_UpdateNodeTimeSeries254">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="GatewayDBId" Parameter="gatewayDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="TimestampUTC" Parameter="timestampUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UpdateTimeUTC" Parameter="updateTimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EP254TimeUTC" Parameter="eP254TimeUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Mode" Parameter="mode" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="FirmwareVersion" Parameter="firmwareVersion" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ScratchpadSequence" Parameter="scratchpadSequence" Type="System.Int32" DbType="Int" />
+    <Parameter Name="HopCount" Parameter="hopCount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MsgDelayLowLatency" Parameter="msgDelayLowLatency" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_CheckAndCreateNodeIDWithGatewayDBId" Method="NMS_CheckAndCreateNodeIDWithGatewayDBId">
+    <Parameter Name="GatewayDBId" Parameter="gatewayDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="NodeId" Parameter="nodeId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="NMS_CheckAndCreateNodeIDWithGatewayDBIdResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="MeterId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NodeId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressHEX" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GatewayDBId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IsSink" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ApplicationVersion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HardwareVersion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Lat" Type="System.Decimal" DbType="Decimal(12,9)" CanBeNull="true" />
+      <Column Name="Long" Type="System.Decimal" DbType="Decimal(12,9)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.NMS_UpdateNodeTimeSeriesStatus" Method="NMS_UpdateNodeTimeSeriesStatus">
+    <Parameter Name="NodeDBId" Parameter="nodeDBId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="TimestampUTC" Parameter="timestampUTC" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NMS_UpdateGateway" Method="NMS_UpdateGateway">
+    <Parameter Name="GatewayName" Parameter="gatewayName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="FeederId" Parameter="feederId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="DTRId" Parameter="dTRId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="SDOId" Parameter="sDOId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Lat" Parameter="lat" Type="System.Decimal" DbType="Decimal(12,9)" />
+    <Parameter Name="Long" Parameter="long" Type="System.Decimal" DbType="Decimal(12,9)" />
+    <Parameter Name="Status" Parameter="status" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Timestamp" Parameter="timestamp" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="GatewayId" Parameter="gatewayId" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="MacAddress" Parameter="macAddress" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="IPv4Address" Parameter="iPv4Address" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="IPv6Address" Parameter="iPv6Address" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="InterfaceType" Parameter="interfaceType" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="DeviceId" Parameter="deviceId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+	<Function Name="dbo.NMS_UpdateGateWayBatteryFlag" Method="NMS_UpdateGateWayBatteryFlag">
+		<Parameter Name="GatewayId" Parameter="gatewayId" Type="System.String" DbType="VarChar(50)" />
+		<Parameter Name="OnBattery" Parameter="status" Type="System.Boolean" DbType="Bit" />
+		<Return Type="System.Int32" />
+	</Function>
+  <Function Name="dbo.NMS_GetAllNodes" Method="NMS_GetAllNodes">
+    <ElementType Name="NMS_GetAllNodesResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NodeId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.NMS_BulkUpdateNodeTimeSeriesStatus" Method="NMS_BulkUpdateNodeTimeSeriesStatus">
+    <Parameter Name="Nodes" Parameter="nodes" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
