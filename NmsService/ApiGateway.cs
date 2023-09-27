@@ -115,20 +115,28 @@ namespace NmsService
                 if (!string.IsNullOrEmpty(gatewayName) && gatewayName.Length > 4)
                 {
                     string GatewayIdPrefix = "";
-                    GatewayIdPrefix = ConfigurationManager.AppSettings.Get("GatewayIdPrefix");
+                    bool HasTwoPrefix = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("HasTwoPrefix"));
 
                     string lastValue = gatewayName.Substring(gatewayName.Length - 4, 4);
                     if (!string.IsNullOrEmpty(lastValue))
                     {
-                        //var lastValueInt = int.Parse(lastValue);
-                        //if (lastValueInt >= 4001 && lastValueInt < 4500)
-                        //{
-                        //    GatewayIdPrefix = "TJSU10";
-                        //}
-                        //else if (lastValueInt >= 4500 && lastValueInt <= 4999)
-                        //{
-                        //    GatewayIdPrefix = "TKSU10";
-                        //}
+                        if(HasTwoPrefix)
+                        {
+                            var lastValueInt = int.Parse(lastValue);
+                            if (lastValueInt >= 4001 && lastValueInt < 4500)
+                            {
+                                GatewayIdPrefix = ConfigurationManager.AppSettings.Get("GatewayIdPrefix");
+                            }
+                            else if (lastValueInt >= 4500 && lastValueInt <= 4999)
+                            {
+                                GatewayIdPrefix = ConfigurationManager.AppSettings.Get("GatewayIdPrefix2");
+                            }
+                        }
+                        else
+                        {
+                            GatewayIdPrefix = ConfigurationManager.AppSettings.Get("GatewayIdPrefix");
+                        }
+
                         gatewayId += GatewayIdPrefix + lastValue;
                     }
                 }

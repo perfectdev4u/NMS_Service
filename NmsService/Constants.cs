@@ -23,7 +23,6 @@ namespace NmsService
         public const string Name = "Crystal_NMS";
         public const string Post = "POST";
         public const string Put = "PUT";
-        public const string GatewayIdPrefix = "ASGU10";
         public const string LowLatency = "Low Latency";
         public const string LowEnergy = "Low Energy";
 
