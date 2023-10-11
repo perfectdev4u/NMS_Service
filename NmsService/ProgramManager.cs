@@ -25,16 +25,22 @@ namespace NmsService
         public static void ProcessApi()
         {
             AppSettings appSettings = new AppSettings();
+            bool masterDataFromExcel = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("MasterDataFromExcel"));
             try
             {
                 //gateway
                 ProcessHESGatewayList(appSettings);
 
-                //MeterMasterData
-                ProcessMeterMasterDataFromExcel();
-
-                ////MeterMasterData
-                //ProcessMeterMasterData(appSettings);
+                if (masterDataFromExcel)
+                {
+                    //MeterMasterData from Excel
+                    ProcessMeterMasterDataFromExcel();
+                }
+                else
+                {
+                    //MeterMasterData
+                    ProcessMeterMasterData(appSettings);
+                }
 
                 //gateway
                 ProcessGateway(appSettings);
