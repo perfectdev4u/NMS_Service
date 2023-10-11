@@ -1,5 +1,8 @@
-﻿namespace NmsService
+﻿using System.ComponentModel;
+
+namespace NmsService
 {
+    [RunInstaller(true)]
     partial class HesService
     {
         /// <summary> 

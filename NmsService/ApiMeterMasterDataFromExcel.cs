@@ -20,46 +20,45 @@ namespace NmsService
         {
             try
             {
-                //List<MeterMasterDataResponseFromExcel> response = new List<MeterMasterDataResponseFromExcel>();
-                //string assetsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets");
-                //string[] excelFiles = Directory.GetFiles(assetsFolderPath, "*.xls");
+                List<MeterMasterDataResponseFromExcel> response = new List<MeterMasterDataResponseFromExcel>();
+                string assetsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets");
+                string[] excelFiles = Directory.GetFiles(assetsFolderPath, "*.xls");
 
-                //foreach (string excelFilePath in excelFiles)
-                //{
-                //    using (var package = new ExcelPackage(new FileInfo(excelFilePath)))
-                //    {
-                //        ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
-                //        if (worksheet != null)
-                //        {
-                //            var rows = worksheet.Cells.Where(x => x.Value != null).Last().End.Row;
-                //            for (int row = 2; row <= rows; row++)
-                //            {
-                //                MeterMasterDataResponseFromExcel res = new MeterMasterDataResponseFromExcel();
-                //                res.MeterNumber = worksheet.Cells[row, 31].Value == null ? string.Empty : worksheet.Cells[row, 31].Value.ToString();
-                //                if (!string.IsNullOrEmpty(res.MeterNumber))
-                //                {
-                //                    res.MeterInstallationDate = worksheet.Cells[row, 11].Value == null ? DateTime.MinValue : DateTime.Parse(worksheet.Cells[row, 11].Value.ToString());
-                //                    res.SDO = worksheet.Cells[row, 66].Value.ToString();
-                //                    res.Latitude = worksheet.Cells[row, 43].Value != null ? worksheet.Cells[row, 43].Value.ToString().Split(',')[0] : string.Empty;
-                //                    res.Longitude = worksheet.Cells[row, 43].Value != null ? worksheet.Cells[row, 43].Value.ToString().Split(',')[1] : string.Empty;
-                //                    res.DTR = worksheet.Cells[row, 69].Value.ToString();
-                //                    res.Feeder = worksheet.Cells[row, 68].Value.ToString();
-                //                    response.Add(res);
-                //                }
-                //            }
-                //        }
-                //        else
-                //        {
-                //            Console.WriteLine("Worksheet not found.");
-                //        }
-                //    }
-                //}
+                foreach (string excelFilePath in excelFiles)
+                {
+                    using (var package = new ExcelPackage(new FileInfo(excelFilePath)))
+                    {
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
+                        if (worksheet != null)
+                        {
+                            var rows = worksheet.Cells.Where(x => x.Value != null).Last().End.Row;
+                            for (int row = 2; row <= rows; row++)
+                            {
+                                MeterMasterDataResponseFromExcel res = new MeterMasterDataResponseFromExcel();
+                                res.MeterNumber = worksheet.Cells[row, 31].Value == null ? string.Empty : worksheet.Cells[row, 31].Value.ToString();
+                                if (!string.IsNullOrEmpty(res.MeterNumber))
+                                {
+                                    res.MeterInstallationDate = worksheet.Cells[row, 11].Value == null ? DateTime.MinValue : DateTime.Parse(worksheet.Cells[row, 11].Value.ToString());
+                                    res.SDO = worksheet.Cells[row, 66].Value.ToString();
+                                    res.Latitude = worksheet.Cells[row, 43].Value != null ? worksheet.Cells[row, 43].Value.ToString().Split(',')[0] : string.Empty;
+                                    res.Longitude = worksheet.Cells[row, 43].Value != null ? worksheet.Cells[row, 43].Value.ToString().Split(',')[1] : string.Empty;
+                                    res.DTR = worksheet.Cells[row, 69].Value.ToString();
+                                    res.Feeder = worksheet.Cells[row, 68].Value.ToString();
+                                    response.Add(res);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Worksheet not found.");
+                        }
+                    }
+                }
 
-                ////var apiResponse = new List<MeterMasterDataResponseFromExcel>();
-                //if (response != null && response.Count > 0)
-                //{
-                //    Create(response);
-                //}
+                if (response != null && response.Count > 0)
+                {
+                    Create(response);
+                }
 
                 //bind nodes into dictionary
                 BindAllNodes();

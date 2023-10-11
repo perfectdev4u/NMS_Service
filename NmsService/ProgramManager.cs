@@ -31,10 +31,10 @@ namespace NmsService
                 ProcessHESGatewayList(appSettings);
 
                 //MeterMasterData
-                //ProcessMeterMasterDataFromExcel();
+                ProcessMeterMasterDataFromExcel();
 
-                //MeterMasterData
-                ProcessMeterMasterData(appSettings);
+                ////MeterMasterData
+                //ProcessMeterMasterData(appSettings);
 
                 //gateway
                 ProcessGateway(appSettings);
