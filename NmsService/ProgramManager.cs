@@ -1,13 +1,18 @@
-﻿using NmsService.Models;
+﻿using DocumentFormat.OpenXml.EMMA;
+using Newtonsoft.Json;
+using NmsService.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 
 using System.Timers;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace NmsService
 {
@@ -26,20 +31,34 @@ namespace NmsService
         {
             AppSettings appSettings = new AppSettings();
             bool masterDataFromExcel = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("MasterDataFromExcel"));
+            bool insertMasterData = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("InsertMasterData"));
+            bool insertMasterDataFromWFM = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("InsertMasterDataFromWFM"));
             try
             {
-                //gateway
+                //gateways
                 ProcessHESGatewayList(appSettings);
 
-                if (masterDataFromExcel)
+                if (insertMasterData)
                 {
-                    //MeterMasterData from Excel
-                    ProcessMeterMasterDataFromExcel();
+                    if (masterDataFromExcel)
+                    {
+                        //MeterMasterData from Excel
+                        ProcessMeterMasterDataFromExcel();
+                    }
+                    else if (insertMasterDataFromWFM)
+                    {
+                        ProcessMeterMasterDataFromWFMApi(appSettings);
+                    }
+                    else
+                    {
+                        //MeterMasterData
+                        ProcessMeterMasterData(appSettings);
+                    }
                 }
                 else
                 {
-                    //MeterMasterData
-                    ProcessMeterMasterData(appSettings);
+                    //bind nodes into dictionary
+                    Helpers.BindNodesHelper.BindAllNodes();
                 }
 
                 //gateway
@@ -260,8 +279,51 @@ namespace NmsService
                 Log.WriteToLog(appSettings, ex);
             }
         }
+
+        private static void ProcessMeterMasterDataFromWFMApi(AppSettings appSettings)
+        {
+            try
+            {
+                appSettings = Utility.AppSettings.Where(x => x.ServiceName.ToLower() == Constants.ApiMeterMasterDataFromWFM).FirstOrDefault();
+                if (appSettings != null)
+                {
+                    if (appSettings.Enabled)
+                    {
+                        if (Utility.CheckServiceRunTime(appSettings))
+                        {
+                            ApiMeterMasterDataFromWEM.Save(appSettings);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(appSettings, ex);
+            }
+        }
+
+        private static void ProcessGatewayDetails(AppSettings appSettings)
+        {
+            try
+            {
+                appSettings = Utility.AppSettings.Where(x => x.ServiceName.ToLower() == Constants.ApiGetGatewayDetails).FirstOrDefault();
+                if (appSettings != null)
+                {
+                    if (appSettings.Enabled)
+                    {
+                        if (Utility.CheckServiceRunTime(appSettings))
+                        {
+                            ApiGetGatewayDetails.Save(appSettings);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(appSettings, ex);
+            }
+        }
+
         #endregion
-
-
     }
 }

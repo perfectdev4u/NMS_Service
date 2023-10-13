@@ -61,7 +61,7 @@ namespace NmsService
                 }
 
                 //bind nodes into dictionary
-                BindAllNodes();
+                Helpers.BindNodesHelper.BindAllNodes();
             }
             catch (Exception ex)
             {
@@ -105,17 +105,6 @@ namespace NmsService
                 catch (Exception ex)
                 {
                 }
-            }
-        }
-
-        private static void BindAllNodes()
-        {
-            DBDataContext context = new DBDataContext();
-            Utility.NodeIdList.Clear();
-            var nodes = context.NMS_GetAllNodes().ToList();
-            foreach (var item in nodes)
-            {
-                Utility.NodeIdList.Add(item.NodeId, item.Id);
             }
         }
     }

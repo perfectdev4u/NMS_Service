@@ -189,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiAnalyticsNodeState.cs" />
+    <Compile Include="ApiGetGatewayDetails.cs" />
     <Compile Include="ApiHESGateway.cs" />
     <Compile Include="ApiGateway.cs" />
     <Compile Include="ApiMeterMasterDataFromExcel.cs" />
@@ -197,7 +198,9 @@
     <Compile Include="ApiEndPoint252.cs" />
     <Compile Include="ApiEndPoint253.cs" />
     <Compile Include="ApiEndPoint254.cs" />
+    <Compile Include="ApiMeterMasterDataFromWEM.cs" />
     <Compile Include="ApiResponse.cs" />
+    <Compile Include="Helpers\BindNodesHelper.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="ColumnarDataToListConverter.cs" />
     <Compile Include="Constants.cs" />

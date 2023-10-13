@@ -173,6 +173,16 @@
     <Parameter Name="DeviceId" Parameter="deviceId" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
+
+  <Function Name="dbo.NMS_UpdateGatewayDetails" Method="NMS_UpdateGatewayDetails">
+    <Parameter Name="GatewayId" Parameter="gatewayId" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Lat" Parameter="lat" Type="System.Decimal" DbType="Decimal(12,9)" />
+    <Parameter Name="Long" Parameter="long" Type="System.Decimal" DbType="Decimal(12,9)" />
+    <Parameter Name="Timestamp" Parameter="timestamp" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="SDOId" Parameter="sDOId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  
 	<Function Name="dbo.NMS_UpdateGateWayBatteryFlag" Method="NMS_UpdateGateWayBatteryFlag">
 		<Parameter Name="GatewayId" Parameter="gatewayId" Type="System.String" DbType="VarChar(50)" />
 		<Parameter Name="OnBattery" Parameter="status" Type="System.Boolean" DbType="Bit" />

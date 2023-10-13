@@ -52,7 +52,7 @@ namespace NmsService
                 }
 
                 //bind nodes into dictionary
-                BindAllNodes();
+                Helpers.BindNodesHelper.BindAllNodes();
                 log.Append("," + DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss") + ",Success,");
             }
             catch (Exception ex)
@@ -105,17 +105,6 @@ namespace NmsService
                     Log.WriteToLog(appSettings, "ApiMeterMasterData.Create()" + string.Format("sdoId:{0}, feederId:{1}, dtrId:{2}, meterId:{3}, nodeId:{4}, nodeDBId:{5}", sdoId, feederId, dtrId, meterId, nodeId, nodeDBId));
                     Log.WriteToLog(appSettings, ex);
                 }
-            }
-        }
-
-        private static void BindAllNodes()
-        {
-            DBDataContext context = new DBDataContext();
-            Utility.NodeIdList.Clear();
-            var nodes = context.NMS_GetAllNodes().ToList();
-            foreach (var item in nodes)
-            {
-                Utility.NodeIdList.Add(item.NodeId, item.Id);
             }
         }
     }

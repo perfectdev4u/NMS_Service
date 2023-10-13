@@ -23,6 +23,7 @@ using System.Diagnostics;
 using System.Net.Security;
 using System.Net.NetworkInformation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Globalization;
 
 namespace NmsService
 {
@@ -201,6 +202,12 @@ namespace NmsService
                         break;
                     }
                     break;
+                case Constants.ApiMeterMasterDataFromWFM:
+                    url = appSettings.ApiEndPoint + appSettings.ApiMethod;
+                    break;
+                case Constants.ApiGetGatewayDetails:
+                    url = appSettings.ApiEndPoint + appSettings.ApiMethod;
+                    break;
             }
             return url;
 
@@ -275,5 +282,45 @@ namespace NmsService
             }
         }
 
+        public static async Task<T> PostRequestWFM<T>(AppSettings appSettings, string postData = null) where T : class
+        {
+            RestResponse response = null;
+            try
+            {
+                var options = new RestClientOptions(appSettings.ApiEndPoint)
+                {
+                    MaxTimeout = -1,
+                };
+                string url = GetUrl(appSettings);
+
+                string encoded = System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1")
+                               .GetBytes(appSettings.ApiUserName + ":" + appSettings.ApiPassword));
+
+                var client = new RestClient(options);
+
+                var request = new RestRequest(url, Method.Post);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization", "Basic " + encoded);
+                var body = new { date = /*"9/10/23" */ DateTime.Now.Date.ToString("d", CultureInfo.CreateSpecificCulture("en-NZ"))};
+
+                request.AddParameter("application/json-patch+json", body, ParameterType.RequestBody);
+
+                response = await client.ExecuteAsync(request);
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(appSettings, ex);
+                return null;
+            }
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(response.Content);
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(appSettings, ex);
+                return null;
+            }
+        }
     }
 }

@@ -228,6 +228,15 @@ namespace NmsService
             IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nodes);
             return ((int)(result.ReturnValue));
         }
+        //13/10/2023
+
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.NMS_UpdateGatewayDetails")]
+        public int NMS_UpdateGatewayDetails([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "GatewayId", DbType = "VarChar(50)")] string gatewayId,    [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "Lat", DbType = "Decimal(12,9)")] System.Nullable<decimal> lat, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "Long", DbType = "Decimal(12,9)")] System.Nullable<decimal> @long,  [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "Timestamp", DbType = "DateTime")] System.Nullable<System.DateTime> timestamp, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "SDOId", DbType = "BigInt")] System.Nullable<long> SDOId)
+        
+        {
+            IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), gatewayId, lat, @long, timestamp);
+            return ((int)(result.ReturnValue));
+        }
     }
 
     public partial class NMS_GetNodeTimeSeriesActiveStatusResult

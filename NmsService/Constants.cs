@@ -18,6 +18,8 @@ namespace NmsService
         public const string ApiGatewaySearch = "gatewaysearch";
         public const string ApiHESGatewayList = "hesgatewaylist";
         public const string ApiGatewayToken = "gatewaytoken";
+        public const string ApiMeterMasterDataFromWFM = "metermasterdatafromwfm";
+        public const string ApiGetGatewayDetails = "apigetgatewaydetails";
         public const bool Status = true;
         public const string Hes = "cry";       
         public const string Name = "Crystal_NMS";

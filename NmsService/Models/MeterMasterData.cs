@@ -82,4 +82,53 @@ namespace NmsService.Models
         public DateTime MeterInstallationDate { get; set; }
     }
 
+    public class MeterMasterDataWFM
+    {
+        [JsonProperty("Meter Serial number")]
+        public string MeterSerialnumber { get; set; }
+
+        [JsonProperty("Installation date")]
+        public string Installationdate { get; set; }
+
+        [JsonProperty("Feeder name with code")]
+        public string Feedernamewithcode { get; set; }
+
+        [JsonProperty("SDO name")]
+        public string SDOname { get; set; }
+
+        [JsonProperty("DT name and code")]
+        public string DTnameandcode { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+    }
+
+    public class RootModel
+    {
+        public bool status { get; set; }
+        public string Message { get; set; }
+        public List<MeterMasterDataWFM> data { get; set; }
+    }
+    public class GatewayDetails
+    {
+        [JsonProperty("Gateway Serial number")]
+        public string GatewaySerialnumber { get; set; }
+
+        [JsonProperty("Installation date")]
+        public string Installationdate { get; set; }
+
+        [JsonProperty("Feeder name with code")]
+        public string Feedernamewithcode { get; set; }
+
+        [JsonProperty("SDO name")]
+        public string SDOname { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+    }
+
+    public class GatewayDetailsRoot
+    {
+        public bool status { get; set; }
+        public string message { get; set; }
+        public List<GatewayDetails> data { get; set; }
+    }
 }

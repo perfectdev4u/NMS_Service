@@ -106,5 +106,17 @@ namespace NmsService
             var columns = JsonConvert.DeserializeObject<List<AnalyticsNodeState>>(jsonResponse, settings);
             return columns;
         }
+
+        public static RootModel GetMeterMasterDataResponseWFM(AppSettings appSettings)
+        {
+            var response = ApiRequest.PostRequestWFM<RootModel>(appSettings).Result;
+            return response;
+        }
+
+        public static GatewayDetailsRoot GetGatewayDetailsBasedOnDate(AppSettings appSettings)
+        {
+            var response = ApiRequest.PostRequestWFM<GatewayDetailsRoot>(appSettings).Result;
+            return response;
+        }
     }
 }
